@@ -37,14 +37,15 @@ class ConfigInstaller
   end
   
   def verify_httpd_conf
-    unless File.read(PassengerPaneConfig::HTTPD_CONF).include? "Include #{PassengerPaneConfig::PASSENGER_APPS_DIR}/*.conf"
-      OSX::NSLog("Will try to append passenger pane vhosts conf to: #{PassengerPaneConfig::HTTPD_CONF}")
-      File.open(PassengerPaneConfig::HTTPD_CONF, 'a') do |f|
+	unless File.exist?(PassengerPaneConfig::PASSENGER_PANE_VHOST_CONF)
+      OSX::NSLog("Will write passenger pane vhosts conf to: #{PassengerPaneConfig::PASSENGER_APPS_DIR}")
+	  File.open(PassengerPaneConfig::PASSENGER_PANE_VHOST_CONF, 'w') do |f|
         f << %{
-
 # Added by the Passenger preference pane
-# Make sure to include the Passenger configuration (the LoadModule,
-# PassengerRoot, and PassengerRuby directives) before this section.
+# Make sure to include the Passenger configuration
+# (the LoadModule, PassengerRoot, and PassengerRuby directives)
+# before this section.
+
 <IfModule passenger_module>
   NameVirtualHost *:80
   <VirtualHost *:80>

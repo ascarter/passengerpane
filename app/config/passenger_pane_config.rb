@@ -4,6 +4,8 @@ module PassengerPaneConfig
   APACHE_RESTART_COMMAND = "/sbin/service org.apache.httpd stop; /sbin/service org.apache.httpd start"
   APACHE_DIR = "/private/etc/apache2"
   HTTPD_CONF = File.join(APACHE_DIR, 'httpd.conf')
+  HTTPD_OTHER_DIR = File.join(APACHE_DIR, 'other')
+  PASSENGER_PANE_VHOST_CONF = File.join(HTTPD_OTHER_DIR, 'passenger_pane_vhost.conf')
   PASSENGER_APPS_DIR = File.join(APACHE_DIR, 'passenger_pane_vhosts')
   PASSENGER_APPS_EXTENSION = "vhost.conf"
 end
